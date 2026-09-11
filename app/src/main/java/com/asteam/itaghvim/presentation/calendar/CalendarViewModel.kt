@@ -2,6 +2,7 @@ package com.asteam.itaghvim.presentation.calendar
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.asteam.itaghvim.core.calendar.HolidayProvider
 import com.asteam.itaghvim.domain.model.CalendarEvent
 import com.asteam.itaghvim.domain.usecase.GetEventsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -14,7 +15,7 @@ import javax.inject.Inject
 
 /**
  * ViewModel صفحه تقویم
- * مدیریت تاریخ انتخابی، ماه جاری و رویدادهای ثبت شده
+ * مدیریت تاریخ انتخابی، ماه جاری، رویدادها و مناسبت ها
  */
 @HiltViewModel
 class CalendarViewModel @Inject constructor(
@@ -26,6 +27,7 @@ class CalendarViewModel @Inject constructor(
 
     init {
         observeEvents()
+        updateHolidays()
     }
 
     private fun observeEvents() {
@@ -40,6 +42,12 @@ class CalendarViewModel @Inject constructor(
         }
     }
 
+    private fun updateHolidays() {
+        _uiState.value = _uiState.value.copy(
+            holidays = HolidayProvider.getHolidays(_uiState.value.month)
+        )
+    }
+
     fun selectDay(day: Int) {
         _uiState.value = _uiState.value.copy(selectedDay = day)
     }
@@ -50,7 +58,11 @@ class CalendarViewModel @Inject constructor(
             month > 12 -> 1
             else -> month
         }
-        _uiState.value = _uiState.value.copy(month = normalizedMonth)
+
+        _uiState.value = _uiState.value.copy(
+            month = normalizedMonth,
+            holidays = HolidayProvider.getHolidays(normalizedMonth)
+        )
     }
 }
 
@@ -60,6 +72,7 @@ data class CalendarUiState(
     val month: Int = 1,
     val selectedDay: Int = 1,
     val events: List<CalendarEvent> = emptyList(),
+    val holidays: List<String> = emptyList(),
     val isLoading: Boolean = true,
     val errorMessage: String? = null
 )

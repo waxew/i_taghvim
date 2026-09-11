@@ -1,13 +1,24 @@
 package com.asteam.itaghvim.presentation.person
 
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 
 // صفحه افزودن شخص
-// نسخه اولیه UI ایجاد شده است
-// اتصال به ViewModel و فرم کامل در مرحله بعد انجام می‌شود
+// فرم کامل و اتصال ViewModel در مراحل بعدی تکمیل می‌شود
 
 @Composable
 fun AddPersonScreen() {
-    Text(text = "افزودن شخص جدید")
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
+    ) {
+        Text(text = "افزودن شخص جدید")
+        Text(text = "مدیریت مخاطبین و یادآوری مناسبت‌ها")
+    }
 }

@@ -1,4 +1,4 @@
-package com.asdev.itaghvim.core.config
+package com.asteam.itaghvim.core.config
 
 /**
  * تنظیمات پایه برنامه آی تقویم
@@ -8,5 +8,5 @@ package com.asdev.itaghvim.core.config
  */
 object AppConfig {
     const val APP_NAME = "آی تقویم"
-    const val PACKAGE_NAME = "com.asdev.itaghvim"
+    const val PACKAGE_NAME = "com.asteam.itaghvim"
 }

@@ -1,5 +1,7 @@
 package com.asteam.itaghvim.core.ads
 
+import android.content.Context
+
 /**
  * Central place for initializing Tapsell SDK.
  *
@@ -8,8 +10,13 @@ package com.asteam.itaghvim.core.ads
  */
 object TapsellInitializer {
 
-    fun initialize() {
-        // TODO: Connect official Tapsell SDK initialization here.
-        // The App Key is stored in TapsellConfig.
+    private var initialized = false
+
+    fun initialize(context: Context) {
+        if (initialized) return
+
+        // Official Tapsell SDK initialization will be connected here.
+        // App key remains isolated inside TapsellConfig.
+        initialized = true
     }
 }

@@ -2,14 +2,21 @@ package com.asteam.itaghvim.data.local.database
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
+import com.asteam.itaghvim.data.local.entity.EventEntity
+import com.asteam.itaghvim.data.local.entity.PersonEntity
 
 /**
  * دیتابیس داخلی برنامه
- * Entity ها در مراحل بعدی اضافه می شوند.
+ *
+ * Phase 1:
+ * اتصال Entity های اصلی تقویم و اشخاص به Room.
  */
 @Database(
-    entities = [],
-    version = 1,
+    entities = [
+        EventEntity::class,
+        PersonEntity::class
+    ],
+    version = 2,
     exportSchema = true
 )
 abstract class AppDatabase : RoomDatabase()

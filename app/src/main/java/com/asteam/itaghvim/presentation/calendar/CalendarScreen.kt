@@ -4,6 +4,8 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.lazy.LazyVerticalGrid
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -16,6 +18,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 
 /**
  * صفحه اصلی تقویم آی تقویم
+ * نمایش وضعیت تقویم و آماده سازی Grid روزها
  */
 @Composable
 fun CalendarScreen(
@@ -47,6 +50,18 @@ fun CalendarScreen(
                 viewModel.changeMonth(uiState.month + 1)
             }) {
                 Text("ماه بعد")
+            }
+        }
+
+        LazyVerticalGrid(
+            columns = androidx.compose.foundation.lazy.grid.GridCells.Fixed(7)
+        ) {
+            items((1..31).toList()) { day ->
+                Button(onClick = {
+                    viewModel.selectDay(day)
+                }) {
+                    Text(day.toString())
+                }
             }
         }
     }

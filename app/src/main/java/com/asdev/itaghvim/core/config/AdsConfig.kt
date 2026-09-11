@@ -1,4 +1,4 @@
-package com.asdev.itaghvim.core.config
+package com.asteam.itaghvim.core.config
 
 /**
  * تنظیمات تبلیغات برنامه

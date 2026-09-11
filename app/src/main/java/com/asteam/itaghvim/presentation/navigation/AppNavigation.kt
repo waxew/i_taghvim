@@ -5,6 +5,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.asteam.itaghvim.presentation.home.HomeScreen
+import com.asteam.itaghvim.presentation.calendar.AddEventScreen
 import com.asteam.itaghvim.presentation.calendar.CalendarScreen
 import com.asteam.itaghvim.presentation.settings.SettingsScreen
 import com.asteam.itaghvim.presentation.person.AddPersonScreen
@@ -12,6 +13,7 @@ import com.asteam.itaghvim.presentation.person.AddPersonScreen
 private object Routes {
     const val HOME = "home"
     const val CALENDAR = "calendar"
+    const val ADD_EVENT = "add_event"
     const val PERSONS = "persons"
     const val SETTINGS = "settings"
 }
@@ -30,6 +32,10 @@ fun AppNavigation() {
 
         composable(Routes.CALENDAR) {
             CalendarScreen()
+        }
+
+        composable(Routes.ADD_EVENT) {
+            AddEventScreen()
         }
 
         composable(Routes.PERSONS) {

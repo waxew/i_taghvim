@@ -1,4 +1,4 @@
-package com.asdev.itaghvim.presentation.navigation
+package com.asteam.itaghvim.presentation.navigation
 
 import androidx.compose.runtime.Composable
 

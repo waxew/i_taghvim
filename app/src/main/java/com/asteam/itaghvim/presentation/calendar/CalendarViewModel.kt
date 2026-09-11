@@ -14,7 +14,7 @@ import javax.inject.Inject
 
 /**
  * ViewModel صفحه تقویم
- * مدیریت تاریخ انتخابی و رویدادهای ثبت شده
+ * مدیریت تاریخ انتخابی، ماه جاری و رویدادهای ثبت شده
  */
 @HiltViewModel
 class CalendarViewModel @Inject constructor(
@@ -25,15 +25,16 @@ class CalendarViewModel @Inject constructor(
     val uiState: StateFlow<CalendarUiState> = _uiState.asStateFlow()
 
     init {
-        loadEvents()
+        observeEvents()
     }
 
-    private fun loadEvents() {
+    private fun observeEvents() {
         viewModelScope.launch {
             getEventsUseCase().collectLatest { events ->
                 _uiState.value = _uiState.value.copy(
                     events = events,
-                    isLoading = false
+                    isLoading = false,
+                    errorMessage = null
                 )
             }
         }
@@ -44,7 +45,12 @@ class CalendarViewModel @Inject constructor(
     }
 
     fun changeMonth(month: Int) {
-        _uiState.value = _uiState.value.copy(month = month)
+        val normalizedMonth = when {
+            month < 1 -> 12
+            month > 12 -> 1
+            else -> month
+        }
+        _uiState.value = _uiState.value.copy(month = normalizedMonth)
     }
 }
 
@@ -54,5 +60,6 @@ data class CalendarUiState(
     val month: Int = 1,
     val selectedDay: Int = 1,
     val events: List<CalendarEvent> = emptyList(),
-    val isLoading: Boolean = true
+    val isLoading: Boolean = true,
+    val errorMessage: String? = null
 )

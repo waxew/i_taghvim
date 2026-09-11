@@ -26,4 +26,8 @@ object MonthCalculator {
     fun daysOfMonth(year: Int, month: Int): Int {
         return PersianCalendar.daysInMonth(month, year)
     }
+
+    fun monthRange(year: Int, month: Int): IntRange {
+        return 1..daysOfMonth(year, month)
+    }
 }

@@ -1,4 +1,4 @@
-package com.asdev.itaghvim.core.di
+package com.asteam.itaghvim.core.di
 
 /**
  * ماژول عمومی Dependency Injection

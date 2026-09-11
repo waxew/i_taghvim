@@ -1,4 +1,4 @@
-package com.asdev.itaghvim.presentation.splash
+package com.asteam.itaghvim.presentation.splash
 
 import androidx.compose.runtime.Composable
 

@@ -1,0 +1,23 @@
+name: Build Release
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    name: Build Android Release
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - name: Build Release
+        run: ./gradlew assembleRelease

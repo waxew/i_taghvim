@@ -1,12 +1,43 @@
 package com.asteam.itaghvim.presentation.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.asteam.itaghvim.presentation.home.HomeScreen
+import com.asteam.itaghvim.presentation.calendar.CalendarScreen
+import com.asteam.itaghvim.presentation.settings.SettingsScreen
+import com.asteam.itaghvim.presentation.person.AddPersonScreen
 
-/**
- * Navigation مرکزی رابط کاربری
- * صفحات در مراحل بعدی به NavHost اضافه می شوند.
- */
+private object Routes {
+    const val HOME = "home"
+    const val CALENDAR = "calendar"
+    const val PERSONS = "persons"
+    const val SETTINGS = "settings"
+}
+
 @Composable
-fun AppNavigation(){
-    // TODO ایجاد NavHost و مدیریت Back Stack
+fun AppNavigation() {
+    val navController = rememberNavController()
+
+    NavHost(
+        navController = navController,
+        startDestination = Routes.HOME
+    ) {
+        composable(Routes.HOME) {
+            HomeScreen()
+        }
+
+        composable(Routes.CALENDAR) {
+            CalendarScreen()
+        }
+
+        composable(Routes.PERSONS) {
+            AddPersonScreen()
+        }
+
+        composable(Routes.SETTINGS) {
+            SettingsScreen()
+        }
+    }
 }

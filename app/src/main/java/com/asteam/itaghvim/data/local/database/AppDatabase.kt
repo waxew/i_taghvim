@@ -2,6 +2,8 @@ package com.asteam.itaghvim.data.local.database
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
+import com.asteam.itaghvim.data.local.dao.EventDao
+import com.asteam.itaghvim.data.local.dao.PersonDao
 import com.asteam.itaghvim.data.local.entity.EventEntity
 import com.asteam.itaghvim.data.local.entity.PersonEntity
 
@@ -19,4 +21,9 @@ import com.asteam.itaghvim.data.local.entity.PersonEntity
     version = 2,
     exportSchema = true
 )
-abstract class AppDatabase : RoomDatabase()
+abstract class AppDatabase : RoomDatabase() {
+
+    abstract fun eventDao(): EventDao
+
+    abstract fun personDao(): PersonDao
+}

@@ -2,6 +2,8 @@ package com.asteam.itaghvim.di
 
 import android.content.Context
 import androidx.room.Room
+import com.asteam.itaghvim.data.local.dao.EventDao
+import com.asteam.itaghvim.data.local.dao.PersonDao
 import com.asteam.itaghvim.data.local.database.AppDatabase
 import dagger.Module
 import dagger.Provides
@@ -27,5 +29,19 @@ object DatabaseModule {
             AppDatabase::class.java,
             "itag_hv_database"
         ).build()
+    }
+
+    @Provides
+    fun provideEventDao(
+        database: AppDatabase
+    ): EventDao {
+        return database.eventDao()
+    }
+
+    @Provides
+    fun providePersonDao(
+        database: AppDatabase
+    ): PersonDao {
+        return database.personDao()
     }
 }

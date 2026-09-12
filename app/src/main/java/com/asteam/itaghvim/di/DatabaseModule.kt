@@ -5,6 +5,7 @@ import androidx.room.Room
 import com.asteam.itaghvim.data.local.dao.EventDao
 import com.asteam.itaghvim.data.local.dao.PersonDao
 import com.asteam.itaghvim.data.local.database.AppDatabase
+import com.asteam.itaghvim.data.local.database.migration.DatabaseMigrations
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -28,7 +29,9 @@ object DatabaseModule {
             context,
             AppDatabase::class.java,
             "itag_hv_database"
-        ).build()
+        )
+            .addMigrations(DatabaseMigrations.MIGRATION_1_2)
+            .build()
     }
 
     @Provides

@@ -13,21 +13,26 @@ object DatabaseMigrations {
         override fun migrate(database: SupportSQLiteDatabase) {
             database.execSQL(
                 """
-                CREATE TABLE IF NOT EXISTS events (
-                    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-                    title TEXT NOT NULL,
-                    dateSolar TEXT NOT NULL,
-                    personName TEXT
+                CREATE TABLE IF NOT EXISTS `events` (
+                    `id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+                    `title` TEXT NOT NULL,
+                    `personName` TEXT NOT NULL,
+                    `dateSolar` TEXT NOT NULL,
+                    `dateLunar` TEXT,
+                    `dateGregorian` TEXT,
+                    `note` TEXT
                 )
                 """.trimIndent()
             )
 
             database.execSQL(
                 """
-                CREATE TABLE IF NOT EXISTS persons (
-                    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-                    name TEXT NOT NULL,
-                    phone TEXT
+                CREATE TABLE IF NOT EXISTS `persons` (
+                    `id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+                    `name` TEXT NOT NULL,
+                    `birthday` TEXT,
+                    `marriageDate` TEXT,
+                    `notes` TEXT
                 )
                 """.trimIndent()
             )

@@ -31,4 +31,7 @@ interface EventDao {
 
     @Query("SELECT * FROM events WHERE personName LIKE '%' || :name || '%'")
     fun search(name: String): Flow<List<EventEntity>>
+
+    @Query("SELECT * FROM events WHERE personName = :personName ORDER BY dateSolar")
+    fun getEventsByPersonName(personName: String): Flow<List<EventEntity>>
 }

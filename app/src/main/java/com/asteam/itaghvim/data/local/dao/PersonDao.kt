@@ -23,6 +23,9 @@ interface PersonDao {
     @Delete
     suspend fun delete(person: PersonEntity)
 
+    @Query("DELETE FROM persons WHERE id = :id")
+    suspend fun deleteById(id: Long)
+
     @Query("SELECT * FROM persons ORDER BY name")
     fun getAll(): Flow<List<PersonEntity>>
 

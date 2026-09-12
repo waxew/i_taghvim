@@ -29,6 +29,9 @@ interface PersonDao {
     @Query("SELECT * FROM persons ORDER BY name")
     fun getAll(): Flow<List<PersonEntity>>
 
+    @Query("SELECT * FROM persons WHERE id = :id LIMIT 1")
+    fun getById(id: Long): Flow<PersonEntity?>
+
     @Query("SELECT * FROM persons WHERE name LIKE '%' || :query || '%'")
     fun search(query: String): Flow<List<PersonEntity>>
 }

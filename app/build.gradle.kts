@@ -46,7 +46,5 @@ dependencies {
     implementation("com.google.dagger:hilt-android:2.52")
     ksp("com.google.dagger:hilt-compiler:2.52")
     implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
-    implementation("com.google.android.gms:play-services-ads-lite:23.6.0")
-    implementation("com.tapsell.sdk:tapsell-sdk-android:4.1.0")
     debugImplementation("androidx.compose.ui:ui-tooling")
 }

@@ -10,6 +10,7 @@ import kotlinx.coroutines.flow.Flow
 interface PersonRepository {
     fun getPersons(): Flow<List<Person>>
     suspend fun insertPerson(person: Person)
+    suspend fun updatePerson(person: Person)
     suspend fun deletePerson(id: Long)
     suspend fun searchPerson(query: String): Flow<List<Person>>
 }

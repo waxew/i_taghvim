@@ -40,4 +40,10 @@ class EventRepositoryImpl @Inject constructor(
             events.map(mapper::toDomain)
         }
     }
+
+    override fun getEventsByPersonName(personName: String): Flow<List<CalendarEvent>> {
+        return eventDao.getEventsByPersonName(personName).map { events ->
+            events.map(mapper::toDomain)
+        }
+    }
 }

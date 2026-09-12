@@ -23,6 +23,12 @@ class PersonRepositoryImpl @Inject constructor(
         }
     }
 
+    override fun getPersonById(id: Long): Flow<Person?> {
+        return personDao.getById(id).map { person ->
+            person?.toDomain()
+        }
+    }
+
     override suspend fun insertPerson(person: Person) {
         personDao.insert(person.toEntity())
     }

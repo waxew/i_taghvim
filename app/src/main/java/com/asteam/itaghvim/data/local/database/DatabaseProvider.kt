@@ -15,6 +15,6 @@ import com.asteam.itaghvim.data.local.entity.PersonEntity
         EventEntity::class
     ],
     version = 1,
-    exportSchema = true
+    exportSchema = false
 )
 abstract class DatabaseProvider : RoomDatabase()

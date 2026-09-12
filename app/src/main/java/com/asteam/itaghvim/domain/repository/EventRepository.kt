@@ -10,5 +10,11 @@ interface EventRepository {
 
     suspend fun addEvent(event: CalendarEvent)
 
+    suspend fun updateEvent(event: CalendarEvent)
+
+    suspend fun deleteEvent(event: CalendarEvent)
+
     fun getEvents(): Flow<List<CalendarEvent>>
+
+    fun getEventsByDate(date: String): Flow<List<CalendarEvent>>
 }

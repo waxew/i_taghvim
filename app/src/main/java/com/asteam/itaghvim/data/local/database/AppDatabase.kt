@@ -19,7 +19,7 @@ import com.asteam.itaghvim.data.local.entity.PersonEntity
         PersonEntity::class
     ],
     version = 2,
-    exportSchema = true
+    exportSchema = false
 )
 abstract class AppDatabase : RoomDatabase() {
 

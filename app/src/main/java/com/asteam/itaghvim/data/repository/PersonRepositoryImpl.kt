@@ -27,16 +27,12 @@ class PersonRepositoryImpl @Inject constructor(
         personDao.insert(person.toEntity())
     }
 
+    override suspend fun updatePerson(person: Person) {
+        personDao.update(person.toEntity())
+    }
+
     override suspend fun deletePerson(id: Long) {
-        personDao.delete(
-            com.asteam.itaghvim.data.local.entity.PersonEntity(
-                id = id,
-                name = "",
-                birthday = null,
-                marriageDate = null,
-                notes = null
-            )
-        )
+        personDao.deleteById(id)
     }
 
     override fun searchPerson(query: String): Flow<List<Person>> {

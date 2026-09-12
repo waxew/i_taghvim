@@ -22,6 +22,7 @@ import com.asteam.itaghvim.domain.model.CalendarEvent
  */
 @Composable
 fun AddEventScreen(
+    selectedSolarDate: String = "",
     viewModel: EventViewModel = hiltViewModel()
 ) {
     var title by remember { mutableStateOf("") }
@@ -46,7 +47,7 @@ fun AddEventScreen(
                         id = 0,
                         title = title,
                         personName = null,
-                        solarDate = "",
+                        solarDate = selectedSolarDate,
                         lunarDate = null,
                         gregorianDate = null,
                         description = null

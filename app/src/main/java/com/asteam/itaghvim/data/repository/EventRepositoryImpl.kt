@@ -21,8 +21,22 @@ class EventRepositoryImpl @Inject constructor(
         eventDao.insert(mapper.toEntity(event))
     }
 
+    override suspend fun updateEvent(event: CalendarEvent) {
+        eventDao.update(mapper.toEntity(event))
+    }
+
+    override suspend fun deleteEvent(event: CalendarEvent) {
+        eventDao.delete(mapper.toEntity(event))
+    }
+
     override fun getEvents(): Flow<List<CalendarEvent>> {
         return eventDao.getAll().map { events ->
+            events.map(mapper::toDomain)
+        }
+    }
+
+    override fun getEventsByDate(date: String): Flow<List<CalendarEvent>> {
+        return eventDao.getEventsByDate(date).map { events ->
             events.map(mapper::toDomain)
         }
     }

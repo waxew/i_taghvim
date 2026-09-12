@@ -17,4 +17,6 @@ interface EventRepository {
     fun getEvents(): Flow<List<CalendarEvent>>
 
     fun getEventsByDate(date: String): Flow<List<CalendarEvent>>
+
+    fun getEventsByPersonName(personName: String): Flow<List<CalendarEvent>>
 }

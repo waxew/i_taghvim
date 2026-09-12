@@ -1,7 +1,8 @@
 package com.asteam.itaghvim.data.repository
 
 import com.asteam.itaghvim.data.local.dao.PersonDao
-import com.asteam.itaghvim.data.local.entity.PersonEntity
+import com.asteam.itaghvim.data.local.mapper.toDomain
+import com.asteam.itaghvim.data.local.mapper.toEntity
 import com.asteam.itaghvim.domain.model.Person
 import com.asteam.itaghvim.domain.repository.PersonRepository
 import kotlinx.coroutines.flow.Flow
@@ -28,7 +29,7 @@ class PersonRepositoryImpl @Inject constructor(
 
     override suspend fun deletePerson(id: Long) {
         personDao.delete(
-            PersonEntity(
+            com.asteam.itaghvim.data.local.entity.PersonEntity(
                 id = id,
                 name = "",
                 birthday = null,
@@ -42,25 +43,5 @@ class PersonRepositoryImpl @Inject constructor(
         return personDao.search(query).map { persons ->
             persons.map { it.toDomain() }
         }
-    }
-
-    private fun PersonEntity.toDomain(): Person {
-        return Person(
-            id = id,
-            name = name,
-            birthday = birthday,
-            marriageDate = marriageDate,
-            notes = notes
-        )
-    }
-
-    private fun Person.toEntity(): PersonEntity {
-        return PersonEntity(
-            id = id,
-            name = name,
-            birthday = birthday,
-            marriageDate = marriageDate,
-            notes = notes
-        )
     }
 }

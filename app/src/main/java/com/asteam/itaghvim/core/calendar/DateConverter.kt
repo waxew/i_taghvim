@@ -1,5 +1,6 @@
 package com.asteam.itaghvim.core.calendar
 
+import java.time.DayOfWeek
 import java.time.LocalDate
 
 /**
@@ -14,6 +15,18 @@ object DateConverter {
             month = date.monthValue,
             day = date.dayOfMonth
         )
+    }
+
+    fun dayOfWeek(date: LocalDate): Int {
+        return when (date.dayOfWeek) {
+            DayOfWeek.SATURDAY -> 0
+            DayOfWeek.SUNDAY -> 1
+            DayOfWeek.MONDAY -> 2
+            DayOfWeek.TUESDAY -> 3
+            DayOfWeek.WEDNESDAY -> 4
+            DayOfWeek.THURSDAY -> 5
+            DayOfWeek.FRIDAY -> 6
+        }
     }
 
     data class PersianDate(

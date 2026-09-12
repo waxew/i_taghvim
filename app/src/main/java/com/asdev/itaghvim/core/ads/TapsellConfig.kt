@@ -1,4 +1,4 @@
-package com.asteam.itaghvim.core.ads
+package com.asdev.itaghvim.core.ads
 
 /**
  * تنظیمات مرکزی تبلیغات تپسل

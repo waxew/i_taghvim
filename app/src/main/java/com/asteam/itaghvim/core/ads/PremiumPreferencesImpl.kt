@@ -1,22 +1,12 @@
 package com.asteam.itaghvim.core.ads
 
-/**
- * Implementation layer for premium feature persistence.
- * DataStore integration will be connected in the next step.
- */
-class PremiumPreferencesImpl : PremiumPreferences {
+import javax.inject.Inject
 
-    private val unlockedFeatures = mutableSetOf<String>()
-
-    override fun saveUnlocked(featureId: String) {
-        unlockedFeatures.add(featureId)
-    }
-
-    override fun isUnlocked(featureId: String): Boolean {
-        return unlockedFeatures.contains(featureId)
-    }
-
-    override fun clearUnlocked() {
-        unlockedFeatures.clear()
-    }
+/** تمام رابط‌های Premium از یک منبع ذخیره‌سازی استفاده می‌کنند. */
+class PremiumPreferencesImpl @Inject constructor(
+    private val dataStore: PremiumDataStore
+) : PremiumPreferences {
+    override suspend fun saveUnlocked(featureId: String) = dataStore.saveUnlockedFeature(featureId)
+    override suspend fun isUnlocked(featureId: String): Boolean = dataStore.isFeatureUnlocked(featureId)
+    override suspend fun clearUnlocked() = dataStore.clearUnlockedFeatures()
 }

@@ -14,7 +14,7 @@ fun PersonDetailScreen(
 ) {
     Column {
         Text(
-            text = state.name
+            text = state.person?.name.orEmpty()
         )
 
         state.events.forEach { event ->

@@ -13,6 +13,7 @@ import com.asteam.itaghvim.core.config.AppConfig
  * - وسط: لوگو یا نام برنامه
  * - سمت چپ: دسترسی به بخش های برنامه
  */
+@OptIn(androidx.compose.material3.ExperimentalMaterial3Api::class)
 @Composable
 fun AppHeader() {
     CenterAlignedTopAppBar(

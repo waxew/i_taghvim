@@ -13,6 +13,11 @@ import dagger.hilt.components.SingletonComponent
 @Module
 @InstallIn(SingletonComponent::class)
 abstract class AppModule {
+    @Binds
+    abstract fun bindEventRepository(
+        implementation: com.asteam.itaghvim.data.repository.EventRepositoryImpl
+    ): com.asteam.itaghvim.domain.repository.EventRepository
+
 
     @Binds
     abstract fun bindPersonRepository(

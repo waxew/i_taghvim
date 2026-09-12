@@ -31,6 +31,8 @@ android {
         }
     }
 
+    sourceSets.getByName("main").java.srcDirs("../presentation", "../domain")
+
     buildFeatures { compose = true }
     packaging { resources.excludes += "/META-INF/{AL2.0,LGPL2.1}" }
 }
@@ -53,4 +55,8 @@ dependencies {
     ksp("com.google.dagger:hilt-compiler:2.52")
     implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
     debugImplementation("androidx.compose.ui:ui-tooling")
+}
+
+ksp {
+    arg("room.schemaLocation", "$projectDir/schemas")
 }

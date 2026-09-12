@@ -1,6 +1,8 @@
 package com.asteam.itaghvim.core.ads
 
-class PremiumFeatureRepositoryImpl(
+import javax.inject.Inject
+
+class PremiumFeatureRepositoryImpl @Inject constructor(
     private val dataStoreRepository: PremiumDataStoreRepository
 ) : PremiumFeatureRepository {
 

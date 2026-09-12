@@ -16,6 +16,9 @@ class EventRepositoryImpl @Inject constructor(
     private val eventDao: EventDao,
     private val mapper: EventMapper
 ) : EventRepository {
+    override fun search(name: String): Flow<List<CalendarEvent>> =
+        eventDao.search(name).map { events -> events.map(mapper::toDomain) }
+
 
     override suspend fun addEvent(event: CalendarEvent) {
         eventDao.insert(mapper.toEntity(event))

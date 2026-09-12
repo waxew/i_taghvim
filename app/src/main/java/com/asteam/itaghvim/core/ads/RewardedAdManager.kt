@@ -18,6 +18,6 @@ class RewardedAdManager {
         // 2. نمایش تبلیغ
         // 3. اجرای onAdCompleted فقط بعد از مشاهده کامل
         // 4. جلوگیری از دادن جایزه در صورت بستن زودهنگام
-        callback.onAdFailed()
+        callback.onAdFailed("تبلیغ در حال حاضر آماده نیست")
     }
 }

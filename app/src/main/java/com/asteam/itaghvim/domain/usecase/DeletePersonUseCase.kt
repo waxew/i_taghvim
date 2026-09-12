@@ -5,10 +5,12 @@ import com.asteam.itaghvim.domain.repository.PersonRepository
 /**
  * حذف شخص از اطلاعات برنامه
  */
-class DeletePersonUseCase(
+import javax.inject.Inject
+
+class DeletePersonUseCase @Inject constructor(
     private val repository: PersonRepository
 ) {
     suspend operator fun invoke(id: Long) {
-        repository.delete(id)
+        repository.deletePerson(id)
     }
 }

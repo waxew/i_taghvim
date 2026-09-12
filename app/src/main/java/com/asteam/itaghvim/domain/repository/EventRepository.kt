@@ -7,6 +7,8 @@ import kotlinx.coroutines.flow.Flow
  * قرارداد ارتباط مناسبت ها بین Domain و Data
  */
 interface EventRepository {
+    fun search(name: String): Flow<List<CalendarEvent>>
+
 
     suspend fun addEvent(event: CalendarEvent)
 

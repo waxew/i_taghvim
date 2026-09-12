@@ -1,8 +1,8 @@
 package com.asteam.itaghvim.core.ads
 
-import kotlinx.coroutines.flow.Flow
+import javax.inject.Inject
 
-class PremiumDataStoreRepositoryImpl(
+class PremiumDataStoreRepositoryImpl @Inject constructor(
     private val dataStore: PremiumDataStore
 ) : PremiumDataStoreRepository {
 
@@ -10,7 +10,7 @@ class PremiumDataStoreRepositoryImpl(
         dataStore.saveUnlockedFeature(featureId)
     }
 
-    override fun isUnlocked(featureId: String): Flow<Boolean> {
+    override suspend fun isUnlocked(featureId: String): Boolean {
         return dataStore.isFeatureUnlocked(featureId)
     }
 

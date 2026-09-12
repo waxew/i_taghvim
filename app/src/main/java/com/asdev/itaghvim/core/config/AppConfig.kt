@@ -1,4 +1,4 @@
-package com.asteam.itaghvim.core.config
+package com.asdev.itaghvim.core.config
 
 /**
  * تنظیمات پایه برنامه آی تقویم

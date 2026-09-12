@@ -66,13 +66,3 @@ class CalendarViewModel @Inject constructor(
     }
 }
 
-
-data class CalendarUiState(
-    val year: Int = 1405,
-    val month: Int = 1,
-    val selectedDay: Int = 1,
-    val events: List<CalendarEvent> = emptyList(),
-    val holidays: List<String> = emptyList(),
-    val isLoading: Boolean = true,
-    val errorMessage: String? = null
-)

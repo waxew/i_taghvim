@@ -74,7 +74,7 @@ fun CalendarScreen(
 
         Text("رویدادها")
         uiState.events
-            .filter { it.date == uiState.selectedDay.toString() }
+            .filter { it.solarDate == uiState.selectedDay.toString() }
             .forEach { event ->
                 Text(event.title)
             }

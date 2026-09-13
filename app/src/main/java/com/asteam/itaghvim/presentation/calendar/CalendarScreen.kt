@@ -15,68 +15,31 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.asteam.itaghvim.core.calendar.MonthCalculator
 
-/**
- * صفحه اصلی تقویم آی تقویم
- * نمایش روزها، رویدادها و مناسبت ها
- */
+/** صفحه تقویم؛ ViewModel از Hilt تزریق می‌شود تا ورود به صفحه باعث کرش نشود. */
 @Composable
-fun CalendarScreen(
-    viewModel: CalendarViewModel = viewModel()
-) {
+fun CalendarScreen(viewModel: CalendarViewModel = hiltViewModel()) {
     val uiState by viewModel.uiState.collectAsState()
-
     val days = MonthCalculator.daysOfMonth(uiState.year, uiState.month)
-
-    Column(
-        modifier = Modifier.fillMaxSize(),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
-    ) {
-        Text(
-            text = "تقویم آی تقویم",
-            style = MaterialTheme.typography.headlineMedium
-        )
-
-        Text(text = "سال ${uiState.year} - ${uiState.month}")
-        Text(text = "روز انتخاب شده: ${uiState.selectedDay}")
-
+    Column(Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center) {
+        Text("تقویم آی تقویم", style = MaterialTheme.typography.headlineMedium)
+        Text("سال ${uiState.year} - ${uiState.month}")
+        Text("روز انتخاب شده: ${uiState.selectedDay}")
         Row {
-            Button(onClick = {
-                viewModel.changeMonth(uiState.month - 1)
-            }) {
-                Text("ماه قبل")
-            }
-
-            Button(onClick = {
-                viewModel.changeMonth(uiState.month + 1)
-            }) {
-                Text("ماه بعد")
-            }
+            Button(onClick = { viewModel.changeMonth(uiState.month - 1) }) { Text("ماه قبل") }
+            Button(onClick = { viewModel.changeMonth(uiState.month + 1) }) { Text("ماه بعد") }
         }
-
         LazyVerticalGrid(columns = GridCells.Fixed(7)) {
             items((1..days).toList()) { day ->
-                Button(onClick = {
-                    viewModel.selectDay(day)
-                }) {
-                    Text(day.toString())
-                }
+                Button(onClick = { viewModel.selectDay(day) }) { Text(day.toString()) }
             }
         }
-
         Text("مناسبت ها")
-        uiState.holidays.forEach { holiday ->
-            Text(holiday)
-        }
-
+        uiState.holidays.forEach { Text(it) }
         Text("رویدادها")
-        uiState.events
-            .filter { it.solarDate == uiState.selectedDay.toString() }
-            .forEach { event ->
-                Text(event.title)
-            }
+        uiState.events.filter { it.solarDate == "${uiState.year}/${uiState.month.toString().padStart(2,'0')}/${uiState.selectedDay.toString().padStart(2,'0')}" }
+            .forEach { Text(it.title) }
     }
 }

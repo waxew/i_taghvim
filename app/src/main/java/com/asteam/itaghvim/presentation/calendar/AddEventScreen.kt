@@ -1,61 +1,21 @@
 package com.asteam.itaghvim.presentation.calendar
-
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.Button
-import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.foundation.layout.*
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.asteam.itaghvim.domain.model.CalendarEvent
 
-/**
- * صفحه افزودن مناسبت جدید
- * اتصال فرم به EventViewModel
- */
+/** فرم افزودن مناسبت؛ ذخیره واقعی در Room و نمایش پیام موفقیت. */
 @Composable
-fun AddEventScreen(
-    selectedSolarDate: String = "",
-    viewModel: EventViewModel = hiltViewModel()
-) {
-    var title by remember { mutableStateOf("") }
-
-    Column(
-        modifier = Modifier.fillMaxSize(),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
-    ) {
-        Text(text = "افزودن مناسبت جدید")
-
-        OutlinedTextField(
-            value = title,
-            onValueChange = { title = it },
-            label = { Text("عنوان مناسبت") }
-        )
-
-        Button(
-            onClick = {
-                viewModel.saveEvent(
-                    CalendarEvent(
-                        id = 0,
-                        title = title,
-                        personName = null,
-                        solarDate = selectedSolarDate,
-                        lunarDate = null,
-                        gregorianDate = null,
-                        description = null
-                    )
-                )
-            }
-        ) {
-            Text("ذخیره")
-        }
-    }
+fun AddEventScreen(selectedSolarDate:String="",onSaved:()->Unit={},viewModel:EventViewModel=hiltViewModel()){
+ var title by remember{mutableStateOf("")}; var saved by remember{mutableStateOf(false)}
+ val date=selectedSolarDate.ifBlank{"1405/01/01"}
+ Column(Modifier.fillMaxSize(),horizontalAlignment=Alignment.CenterHorizontally,verticalArrangement=Arrangement.Center){
+  Text("افزودن مناسبت جدید")
+  OutlinedTextField(value=title,onValueChange={title=it},label={Text("عنوان مناسبت")})
+  Button(enabled=title.isNotBlank(),onClick={viewModel.saveEvent(CalendarEvent(0,title.trim(),null,date,null,null,null)){saved=true;onSaved()}}){Text("ذخیره")}
+  if(saved)Text("رویداد با موفقیت ذخیره شد")
+ }
 }

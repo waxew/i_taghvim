@@ -1,31 +1,28 @@
 package com.asteam.itaghvim.core.calendar
 
-import java.time.DayOfWeek
 import java.time.LocalDate
 
 /**
- * تبدیل تاریخ های تقویم
- * نسخه پایه برای توسعه تبدیل شمسی و میلادی
+ * توابع کمکی تبدیل تاریخ برای ViewModel و UI.
  */
 object DateConverter {
 
     fun gregorianToPersian(date: LocalDate): PersianDate {
-        return PersianDate(
-            year = date.year - 621,
-            month = date.monthValue,
-            day = date.dayOfMonth
-        )
+        val value = CalendarConverter.gregorianToSolar(date.year, date.monthValue, date.dayOfMonth)
+            .split('/')
+        return PersianDate(value[0].toInt(), value[1].toInt(), value[2].toInt())
     }
 
+    /** شنبه صفر است تا چیدمان تقویم فارسی مستقیماً قابل استفاده باشد. */
     fun dayOfWeek(date: LocalDate): Int {
         return when (date.dayOfWeek) {
-            DayOfWeek.SATURDAY -> 0
-            DayOfWeek.SUNDAY -> 1
-            DayOfWeek.MONDAY -> 2
-            DayOfWeek.TUESDAY -> 3
-            DayOfWeek.WEDNESDAY -> 4
-            DayOfWeek.THURSDAY -> 5
-            DayOfWeek.FRIDAY -> 6
+            java.time.DayOfWeek.SATURDAY -> 0
+            java.time.DayOfWeek.SUNDAY -> 1
+            java.time.DayOfWeek.MONDAY -> 2
+            java.time.DayOfWeek.TUESDAY -> 3
+            java.time.DayOfWeek.WEDNESDAY -> 4
+            java.time.DayOfWeek.THURSDAY -> 5
+            java.time.DayOfWeek.FRIDAY -> 6
         }
     }
 

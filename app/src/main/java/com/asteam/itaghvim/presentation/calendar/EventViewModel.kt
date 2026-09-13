@@ -19,5 +19,5 @@ class EventViewModel @Inject constructor(
  fun saveEvent(event:CalendarEvent,onSaved:()->Unit={}){viewModelScope.launch{runCatching{addEventUseCase(event)}.onSuccess{onSaved()}}}
  fun updateEvent(event:CalendarEvent){viewModelScope.launch{updateEventUseCase(event)}}
  fun deleteEvent(event:CalendarEvent){viewModelScope.launch{deleteEventUseCase(event)}}
- fun getEventsByDate(date:String):Flow<List<CalendarEvent>>=getEventsByDateUseCase(date)
+ fun getEventsByDate(date: String): Flow<List<CalendarEvent>> = getEventsByDateUseCase(date)
 }
